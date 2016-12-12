@@ -1,21 +1,32 @@
 <?php
-
 include 'db.php';
 
 if (isset ( $_REQUEST ["action"] ) && $_REQUEST ["action"] == "login") {
 	$user_name = $_REQUEST ["username"];
 	$pass_word = $_REQUEST ["password"];
 	
-	$query = mysql_query("SELECT * FROM tbl_nhanvien WHERE maNV='$user_name' AND matKhauNV='$pass_word'");
-	$row = mysql_num_rows($query);
+	$query = "SELECT * FROM `tbl_nhanvien` WHERE `tenDangNhap` = '$user_name'";
+	$result = $conn->query ( $query );
 	
-	
-	if($row > 0){
-		echo 1;
-	}else{
-		echo 0;
+	if ($result->num_rows > 0) {
+		while ( $row = $result->fetch_assoc () ) {
+			if ($pass_word == $row ["matKhau"]) {
+				$row ["result"] = "success";
+				
+				
+				echo json_encode ( $row );
+				
+				// var_dump ( $row );
+			} else {
+				$arr ["result"] = "failure";
+				echo json_encode ( $arr );
+			}
+		}
+	} else {
+		$arr ["result"] = "wrongusername";
+		echo json_encode ( $arr );
 	}
+	$conn->close ();
 }
-
 
 ?>
