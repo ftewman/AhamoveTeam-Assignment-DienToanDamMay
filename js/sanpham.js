@@ -1,16 +1,40 @@
 var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay";
+	var backupProduct;
+
+	function editProduct(id){
+		$.getJSON(link+'/getproductoredit.php',{action:'getproduct',maSanPham:id},function(resGTE){
+			$('#productNameEdit').val(resGTE.tenSanPham);
+			$('#productNameEdit').attr('name',resGTE.maSanPham);
+			$('#priceEdit').val(resGTE.giaSanPham);
+			$('#descriptionEdit').val(resGTE.moTa);
+			var outputCE = "";
+			var catForEdit = resGTE.Categories;
+			$.each(catForEdit,function(iPcFE,ePcFE){
+				outputCE+= '<option value="'+ePcFE.maLoai+'">'+ePcFE.tenLoai+'</option>';
+			});
+			$('#productCategoriesEdit').html(outputCE);
+			$('#productCategoriesEdit').val(resGTE.fk_maLoai).change();
+			
+			$('#popupEdit').popup('open');
+		});
+		
+		
+		
+		
+	}
 //load category and product
 	function loadCatAndProd(){
  		$.getJSON(link+'/getproductandcategories.php',function(res){
 	 		var categories = res.Categories;
 		 	var products = res.Products;
+		 	backupProduct = products;
 		 	var outputC = "";
 		 	var outputTbl ="";
 			$.each(categories,function(indexC, elementC){
 				outputC+= '	<option value="'+elementC.maLoai+'">'+elementC.tenLoai+'</option>';
 				outputTbl+= '<tr>'
 					+'<th><b class="ui-table-cell-label">ID</b>'+elementC.maLoai+'</th>'
-					+'<td><b class="ui-table-cell-label">Tên Máy</b>'+elementC.tenLoai+'</td>'
+					+'<td><b class="ui-table-cell-label">Tên Loại</b>'+elementC.tenLoai+'</td>'
 					+"<td><input type=\"button\" class=\"ui-btn\" onclick=\"deleteCategory('"+elementC.maLoai+"')\" id=\"deleteProduct\" value=\"Xóa\"></td>"
 					+'</tr>';
 			});
@@ -20,8 +44,8 @@ var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay";
 			var outputP = "";
 			$.each(products,function(indexP, elementP){
 				outputP+= '<tr>'
-					+'<th><b class="ui-table-cell-label">ID</b>'+elementP.maSanPham+'</th>'
-					+'<td><b class="ui-table-cell-label">Tên Máy</b>'+elementP.tenSanPham+'</td>'
+					+'<th><b class="ui-table-cell-label">ID</b>'+elementP.maSanPham+'</th>' 
+					+'<td><b class="ui-table-cell-label">Tên Máy</b><a id="editProduct" class="ui-link" onclick="editProduct('+elementP.maSanPham+')" href="#">'+elementP.tenSanPham+'</a></td>'
 					+'<td><b class="ui-table-cell-label">Giá</b>'+elementP.giaSanPham+'</td>'
 					+'<td data-rel="external"><b class="ui-table-cell-label">Mô tả</b>'+elementP.moTa+'</td>'
 					+"<td><input type=\"button\" class=\"ui-btn\" onclick=\"deleteProduct('"+elementP.maSanPham+"')\" id=\"deleteProduct\" value=\"Xóa\"></td>"
@@ -30,6 +54,9 @@ var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay";
 			$('#listSanPham').html(outputP);
 	 	});	
  	}
+	
+	
+	
 // delete product
 	function deleteProduct(idDP){
 		$.getJSON(link+'/deleteproductorcategory.php',{action:'product',maSanPham:idDP},function(resDP){
@@ -87,6 +114,45 @@ var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay";
 			}
 
 	 	});
+	 	//update product
+	 	$('#editProduct').click(function(){
+	 		var idUpdate = $('#productNameEdit').attr('name');
+	 		var productNameEdit = $('#productNameEdit').val();
+			var priceEdit = $('#priceEdit').val();
+			var descriptionEdit = $('#descriptionEdit').val();
+			var productCategoriesEdit = $('#productCategoriesEdit').val();
+			if(productNameEdit.length == 0){
+				$('#productNameEdit').focus();
+				$('#productNameEdit').attr('placeholder','Không được để trống');
+				
+			}else if(priceEdit.length == 0){
+				$('#priceEdit').focus();
+				$('#priceEdit').attr('placeholder','Không được để trống');
+				
+			}else if(descriptionEdit.length == 0){
+				$('#descriptionEdit').focus();
+				$('#descriptionEdit').attr('placeholder','Không được để trống');
+				
+			}else{
+				$.getJSON(link+'/getproductoredit.php'
+						,{action:'editproduct',maSanPham:idUpdate,tenSanPham:productNameEdit,giaSanPham:priceEdit,fk_maLoai:productCategoriesEdit,moTa:descriptionEdit},
+						function(resUP){
+					if(resUP.result == 'true'){
+						loadCatAndProd();
+						$('#productNameEdit').val("");
+						$('#priceEdit').val("");
+						$('#descriptionEdit').val("");
+						$('#productNameEdit').focus();
+						$('#tblProductEdit').collapsible('expand');
+						setTimeout(function(){$("#popupEdit").popup("close");}, 100);
+						$("html, body").animate({ scrollTop: $(document).height() }, 1000);
+					}
+					},	function(errUP){
+							alert(errUP);
+						});		
+			}
+	 	});
+	 	
 	 	// add category
 		$('#addCat').click(function(){
 			var catName = $('#catName').val();

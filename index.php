@@ -12,7 +12,7 @@
 <script type="text/javascript">
 		var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay";
 		var resultCheck = localStorage.getItem("result","none");
-		if(resultCheck=="success"){
+		if(resultCheck=='true'){
 			window.location.assign('productmanagerment.php');
 		}
 			$(document).ready(function() {
@@ -21,7 +21,6 @@
 				$("#login").click(function() {
                     var un = $("#username").val();
 					var pw = $("#password").val();
-					
 					if($.trim(un).length > 0 && $.trim(pw).length > 0){
 						
 						$.getJSON(link+'/checklogin.php', {action:'login',username:un, password: pw}, function(data){
@@ -32,7 +31,12 @@
 								localStorage.setItem("diaChiNV", data.diaChiNV);
 								localStorage.setItem("soDienThoaiNV", data.soDienThoaiNV);
 								localStorage.setItem("matKhau", data.matKhau);
-								localStorage.setItem("result", data.result);
+								if($('#checkLogin').is(':checked')){
+									localStorage.setItem("result", true);
+								}else{
+									localStorage.setItem("result", false);
+								}
+								
 								window.location.assign('productmanagerment.php');
 							}
 						});
@@ -72,7 +76,12 @@
 			for="username">Tên đăng nhập:</label> <input type="text"
 			name="username" id="username" required> <label for="password">Mật
 			khẩu:</label> <input type="password" name="password" id="password"
-			required> <input type="button" class="ui-btn" value="Đăng nhập"
+			required> 
+			<label>
+			<input type="checkbox" value="Lưu đăng nhập" id="checkLogin"> Lưu đăng nhập
+			</label>
+			
+			<input type="button" class="ui-btn" value="Đăng nhập"
 			id="login"> <a href="#" class="quenMatKhau">* Quên mật khẩu</a>
 	</form>
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="images/fav.png" type="image/x-icon"/>
+<link rel="icon" href="images/fav.png" type="image/x-icon" />
 <title>Quản Lý Sản Phẩm</title>
 <link rel="stylesheet" href="jquery-mobile/jquery.mobile-1.4.5.min.css" />
 <script src="jquery-mobile/jquery-1.11.1.min.js"></script>
@@ -65,13 +65,13 @@
 					<label for="productName">Tên sản phẩm:</label> <input type="text"
 						name="productName" id="productName" required> <label for="price">Giá:</label>
 					<input type="number" name="price" id="price" maxlength="12"
-						required> <label for="description">Mô tả:</label>
+						required> <label for="productName">Loại sản phẩm:</label> <select
+						id="productCategories">
+						<option value="1">Apple</option>
+					</select> <label for="description">Mô tả:</label>
 					<textarea type="text" name="description" id="description"
 						maxlength="50" required></textarea>
-					<select id="productCategories">
-						<option value="1">Apple</option>
-					</select> <input type="button" class="ui-btn" value="Thêm"
-						id="addProduct">
+					<input type="button" class="ui-btn" value="Thêm" id="addProduct">
 				</form>
 			</section>
 
@@ -100,7 +100,29 @@
 					</tbody>
 				</table>
 			</section>
-
+			<div data-role="popup" id="popupEdit" data-theme="a"
+				class="ui-corner-all">
+				    
+				<form>
+					        
+					<div style="padding: 5px 35px;">
+						            
+						<h3>Sửa sản phẩm</h3>
+						  <label for="productNameEdit">Tên sản phẩm:</label> <input
+							type="text" name="productNameEdit" id="productNameEdit" required>
+						<label for="priceEdit">Giá:</label> <input type="number"
+							name="priceEdit" id="priceEdit" maxlength="12" required> <label
+							for="productCategoriesEdit">Loại sản phẩm:</label> <select
+							id="productCategoriesEdit">
+							<option value="1">Apple</option>
+						</select> <label for="descriptionEdit">Mô tả:</label>
+						<textarea type="text" name="descriptionEdit" id="descriptionEdit"
+							maxlength="50" required></textarea>
+						<input type="button" class="ui-btn" value="Cập nhật" id="editProduct">
+					</div>
+					    
+				</form>
+			</div>
 		</section>
 	</section>
 
