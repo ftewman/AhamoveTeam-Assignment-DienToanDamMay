@@ -12,8 +12,7 @@ if ($action == "product") {
 	$giaSanPham = $_REQUEST ["giaSanPham"];
 	$fk_maLoai = $_REQUEST ["fk_maLoai"];
 	$moTa = $_REQUEST ["moTa"];
-}
-if ($action = "category") {
+}else if ($action = "category") {
 	$tenLoai = $_REQUEST ["tenLoai"];
 }
 

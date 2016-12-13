@@ -1,20 +1,20 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>Trang chu</title>
-<link rel="stylesheet"
-	href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script
-	src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="images/fav.png" type="image/x-icon" />
+<title>Đăng nhập</title>
+<link rel="stylesheet" href="jquery-mobile/jquery.mobile-1.4.5.min.css" />
+<script src="jquery-mobile/jquery-1.11.1.min.js"></script>
+<script src="jquery-mobile/jquery.mobile-1.4.5.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <script type="text/javascript">
+		var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay";
 		var resultCheck = localStorage.getItem("result","none");
 		if(resultCheck=="success"){
-			window.location.assign(  'manager.php' );
+			window.location.assign('productmanagerment.php');
 		}
-       	var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay";
 			$(document).ready(function() {
 				
 				$("#username").focus();
@@ -24,7 +24,6 @@
 					
 					if($.trim(un).length > 0 && $.trim(pw).length > 0){
 						
-						var dulieu = 'action=login&username='+un+'&password='+pw;
 						$.getJSON(link+'/checklogin.php', {action:'login',username:un, password: pw}, function(data){
 							if(data.result == "success"){
 								localStorage.setItem("maNhanVien", data.maNhanVien);
@@ -34,7 +33,7 @@
 								localStorage.setItem("soDienThoaiNV", data.soDienThoaiNV);
 								localStorage.setItem("matKhau", data.matKhau);
 								localStorage.setItem("result", data.result);
-								window.location.assign(  'manager.php' );
+								window.location.assign('productmanagerment.php');
 							}
 						});
 						

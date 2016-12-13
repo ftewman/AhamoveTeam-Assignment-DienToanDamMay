@@ -2,5 +2,5 @@ eclipse.preferences.version=1
 encoding/checklogin.php=UTF-8
 encoding/getproductandcategories.php=UTF-8
 encoding/getproducts.php=UTF-8
-encoding/login.php=UTF-8
-encoding/manager.php=UTF-8
+encoding/index.php=UTF-8
+encoding/productmanagerment.php=UTF-8
