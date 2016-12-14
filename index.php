@@ -41,26 +41,6 @@
 							}
 						});
 						
-// 						$.ajax({
-// 							type: "POST",
-// 							data: dulieu,
-// 							url: link+ "/checklogin.php",
-// 							success: function(responseText){
-
-// 								if(responseText == "1"){
-// 									window.location.href="http://24h.com.vn/";
-// 								}else if(responseText == "0"){
-// 									alert("false");
-// 								}else{
-// 									alert("loi"+ responseText);
-// 								}
-// 							},
-// 							error: function(XMLHttpRequest, textStatus, errorThrown) { 
-// 								alert("Status: " + errorThrown.responseText);
-// 							} 
-						
-// 						});
-
 					}
 					
                 });
