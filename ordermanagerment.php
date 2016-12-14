@@ -9,7 +9,7 @@
 <script src="jquery-mobile/jquery-1.11.1.min.js"></script>
 <script src="jquery-mobile/jquery.mobile-1.4.5.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/style.css">
-<script type="text/javascript" src="js/sanpham.js"></script>
+<script type="text/javascript" src="js/order.js"></script>
 
 </head>
 
@@ -18,14 +18,14 @@
 	<section id="container">
 		<section data-role="navbar">
 			<ul>
-				<li><a href="" id="btnProduct" class="ui-btn ui-btn-active">Sản Phẩm</a></li>
-				<li><a href="" id="btnOrder" class="ui-btn">Đơn Hàng</a></li>
+				<li><a href="" id="btnProduct" class="ui-btn">Sản Phẩm</a></li>
+				<li><a href="" id="btnOrder" class="ui-btn ui-btn-active">Đơn Hàng</a></li>
 				<li><a href="" id="btnLogout" class="ui-btn">Đăng Xuất</a></li>
 			</ul>
 		</section>
 		<section id="content" data-role="content">
 			<section id="themLoaiSanPham">
-				<h3>Thêm Loại Sản Phẩm</h3>
+				<h3>Thêm Đơn Hàng</h3>
 				<form method="post" id="formAddProduct">
 					<label for="catName">Tên loại sản phẩm:</label> <input type="text"
 						name="catName" id="catName" required> <input type="button"

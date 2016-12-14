@@ -1,8 +1,16 @@
-var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay";
+var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay/api/";
 	var backupProduct;
-
+	function checklogin(){
+		var resultCheck = localStorage.getItem("result","none");
+		if(resultCheck!='true'){
+			window.location.assign('index.php');
+		}
+	}
+	checklogin();
+	
+	
 	function editProduct(id){
-		$.getJSON(link+'/getproductoredit.php',{action:'getproduct',maSanPham:id},function(resGTE){
+		$.getJSON(link+'getproductoredit.php',{action:'getproduct',maSanPham:id},function(resGTE){
 			$('#productNameEdit').val(resGTE.tenSanPham);
 			$('#productNameEdit').attr('name',resGTE.maSanPham);
 			$('#priceEdit').val(resGTE.giaSanPham);
@@ -17,14 +25,10 @@ var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay";
 			
 			$('#popupEdit').popup('open');
 		});
-		
-		
-		
-		
 	}
 //load category and product
 	function loadCatAndProd(){
- 		$.getJSON(link+'/getproductandcategories.php',function(res){
+ 		$.getJSON(link+'getproductandcategories.php',function(res){
 	 		var categories = res.Categories;
 		 	var products = res.Products;
 		 	backupProduct = products;
@@ -59,7 +63,7 @@ var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay";
 	
 // delete product
 	function deleteProduct(idDP){
-		$.getJSON(link+'/deleteproductorcategory.php',{action:'product',maSanPham:idDP},function(resDP){
+		$.getJSON(link+'deleteproductorcategory.php',{action:'product',maSanPham:idDP},function(resDP){
 			if(resDP.result == "true"){
 				loadCatAndProd();
 			}
@@ -67,7 +71,7 @@ var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay";
 	}
 // delete category
 	function deleteCategory(idDC){
-		$.getJSON(link+'/deleteproductorcategory.php',{action:'category',maLoai:idDC},function(resDC){
+		$.getJSON(link+'deleteproductorcategory.php',{action:'category',maLoai:idDC},function(resDC){
 			if(resDC.result == "true"){
 				loadCatAndProd();
 			}
@@ -134,7 +138,7 @@ var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay";
 				$('#descriptionEdit').attr('placeholder','Không được để trống');
 				
 			}else{
-				$.getJSON(link+'/getproductoredit.php'
+				$.getJSON(link+'getproductoredit.php'
 						,{action:'editproduct',maSanPham:idUpdate,tenSanPham:productNameEdit,giaSanPham:priceEdit,fk_maLoai:productCategoriesEdit,moTa:descriptionEdit},
 						function(resUP){
 					if(resUP.result == 'true'){
@@ -172,6 +176,12 @@ var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay";
 			}
 			,function(errIC){alert(errIC)});
 			
+		});
+		$('#btnProduct').click(function(){
+			window.location.assign('productmanagerment.php');
+		});
+		$('#btnOrder').click(function(){
+			window.location.assign('ordermanagerment.php');
 		});
 		 
 		$('#btnLogout').click(function(){

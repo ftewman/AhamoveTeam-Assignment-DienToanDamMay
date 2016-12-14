@@ -10,7 +10,7 @@
 <script src="jquery-mobile/jquery.mobile-1.4.5.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <script type="text/javascript">
-		var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay";
+		var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay/api/";
 		var resultCheck = localStorage.getItem("result","none");
 		if(resultCheck=='true'){
 			window.location.assign('productmanagerment.php');
@@ -23,7 +23,7 @@
 					var pw = $("#password").val();
 					if($.trim(un).length > 0 && $.trim(pw).length > 0){
 						
-						$.getJSON(link+'/checklogin.php', {action:'login',username:un, password: pw}, function(data){
+						$.getJSON(link+'checklogin.php', {action:'login',username:un, password: pw}, function(data){
 							if(data.result == "success"){
 								localStorage.setItem("maNhanVien", data.maNhanVien);
 								localStorage.setItem("tenDangNhap", data.tenDangNhap);
