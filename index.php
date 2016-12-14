@@ -13,7 +13,7 @@
 		var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay/api/";
 		var resultCheck = localStorage.getItem("result","none");
 		if(resultCheck=='true'){
-			window.location.assign('productmanagerment.php');
+			window.location.assign('ordermanagerment.php');
 		}
 			$(document).ready(function() {
 				

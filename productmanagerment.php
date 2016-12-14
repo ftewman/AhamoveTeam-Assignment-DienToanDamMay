@@ -18,8 +18,8 @@
 	<section id="container">
 		<section data-role="navbar">
 			<ul>
-				<li><a href="" id="btnProduct" class="ui-btn ui-btn-active">Sản Phẩm</a></li>
 				<li><a href="" id="btnOrder" class="ui-btn">Đơn Hàng</a></li>
+				<li><a href="" id="btnProduct" class="ui-btn ui-btn-active">Sản Phẩm</a></li>
 				<li><a href="" id="btnLogout" class="ui-btn">Đăng Xuất</a></li>
 			</ul>
 		</section>
