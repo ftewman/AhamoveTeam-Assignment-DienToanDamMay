@@ -27,12 +27,17 @@
 			<section id="themLoaiSanPham">
 				<h3>Đơn Hàng Mới</h3>
 				<form method="post" id="fromNewOrder" class="ui-filterable">
-					<label for="customerPhone">Số điện thoại:</label> <input type="tel"
-						name="phone" id="phone" required> <label for="customerName">Tên
-						khách hàng:</label> <input type="text" name="customerName"
-						id="customerName" required> <label for="customerAddress">Địa chỉ:</label>
-					<input type="text" name="customerAddress" id="customerAddress"
-						required>  <input id="searchProduct" data-type="search"
+					<label for="customerPhone">Số điện thoại:</label> <input
+						type="number" id="customerPhone" name="customerPhone"
+						data-type="search" required> <br>
+					<ul id="lvPhone" data-role="listview" data-filter="true"
+						data-filter-reveal="true" data-input="#customerPhone">
+					</ul>
+					<br> <label for="customerName">Tên khách hàng:</label> <input
+						type="text" name="customerName" id="customerName" required> <label
+						for="customerAddress">Địa chỉ:</label> <input type="text"
+						name="customerAddress" id="customerAddress" required>  <input
+						id="searchProduct" data-type="search"
 						placeholder="Tìm kiếm điện thoại"><br>
 					<ul data-role="listview" data-filter="true"
 						data-filter-reveal="true" data-input="#searchProduct"
@@ -54,8 +59,9 @@
 								<tr>
 									<th data-priority="1">ID</th>       
 									<th data-priority="2">Tên Máy</th>       
-									<th data-priority="3">Giá</th>       
-									<th data-priority="persist">Mô tả</th>
+									<th data-priority="3">Giá</th>
+									<th data-priority="persist">Số Lượng</th>
+									<th data-priority="1"></th> 
 								</tr>
 							</thead>
 							<tbody id="listCart">
@@ -65,36 +71,19 @@
 					</section>
 					<hr>
 
-					<br> <input type="button" class="ui-btn" value="Thêm" id="btnAddOrder">
+					<br> <input type="button" class="ui-btn" value="Thêm"
+						id="btnAddOrder">
 				</form>
 
 			</section>
 
 
 
-			<div data-role="popup" id="popupEdit" data-theme="a"
+			<div data-role="popup" id="popupSuccess" data-theme="a"
 				class="ui-corner-all">
 				    
-				<form>
-					        
-					<div style="padding: 5px 35px;">
-						            
-						<h3>Sửa sản phẩm</h3>
-						  <label for="productNameEdit">Tên sản phẩm:</label> <input
-							type="text" name="productNameEdit" id="productNameEdit" required>
-						<label for="priceEdit">Giá:</label> <input type="number"
-							name="priceEdit" id="priceEdit" maxlength="12" required> <label
-							for="productCategoriesEdit">Loại sản phẩm:</label> <select
-							id="productCategoriesEdit">
-							<option value="1">Apple</option>
-						</select> <label for="descriptionEdit">Mô tả:</label>
-						<textarea type="text" name="descriptionEdit" id="descriptionEdit"
-							maxlength="50" required></textarea>
-						<input type="button" class="ui-btn" value="Cập nhật"
-							id="editProduct">
-					</div>
+				<p>Thêm thành công</p>
 					    
-				</form>
 			</div>
 		</section>
 
