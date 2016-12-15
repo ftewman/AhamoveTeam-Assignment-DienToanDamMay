@@ -16,13 +16,22 @@
 <body>
 
 	<section id="container">
-		<section data-role="navbar">
-			<ul>
-				<li><a href="" id="btnOrder" class="ui-btn ui-btn-active">Đơn Hàng</a></li>
-				<li><a href="" id="btnProduct" class="ui-btn">Sản Phẩm</a></li>
-				<li><a href="" id="btnLogout" class="ui-btn">Đăng Xuất</a></li>
-			</ul>
+		<section data-role="header">
+			<h1>Quản Lý Đơn Hàng</h1>
+			    <a href="" data-icon="lock" id="btnLogout" class="ui-btn-right">Đăng
+				Xuất</a>     
+			<section data-role="navbar">
+				        
+				<ul>
+					<li><a href="" id="btnOrder" class="ui-btn ui-btn-active">Đơn Hàng</a></li>
+					<li><a href="" id="btnInvoice" class="ui-btn">Hóa Đơn</a></li>
+					<li><a href="" id="btnProduct" class="ui-btn">Sản Phẩm</a></li>
+				</ul>
+				    
+			</section>
+			<!-- /navbar -->
 		</section>
+		<!-- /header -->
 		<section id="content" data-role="content">
 			<section id="themLoaiSanPham">
 				<h3>Đơn Hàng Mới</h3>

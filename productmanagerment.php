@@ -16,13 +16,26 @@
 <body>
 
 	<section id="container">
-		<section data-role="navbar">
-			<ul>
-				<li><a href="" id="btnOrder" class="ui-btn">Đơn Hàng</a></li>
-				<li><a href="" id="btnProduct" class="ui-btn ui-btn-active">Sản Phẩm</a></li>
-				<li><a href="" id="btnLogout" class="ui-btn">Đăng Xuất</a></li>
-			</ul>
+		<section data-role="header">
+			<h1>Quản Lý Sản Phẩm</h1>
+			<!-- 			    <a href="" data-icon="lock" id="btnLogout" class="ui-btn-right">Đăng -->
+			<!-- 				Xuất</a>      -->
+			<a href="#nav-panel" data-icon="bars" data-iconpos="notext"
+				class="ui-link ui-btn-left ui-btn ui-icon-bars ui-btn-icon-notext ui-shadow ui-corner-all"
+				data-role="button" role="button">Menu</a>
+			<section data-role="navbar">
+				        
+				<ul>
+					<li><a href="" id="btnOrder" class="ui-btn">Đơn Hàng</a></li>
+					<li><a href="" id="btnInvoice" class="ui-btn">Hóa Đơn</a></li>
+					<li><a href="" id="btnProduct" class="ui-btn ui-btn-active">Sản
+							Phẩm</a></li>
+				</ul>
+				    
+			</section>
+			<!-- /navbar -->
 		</section>
+		<!-- /header -->
 		<section id="content" data-role="content">
 			<section id="themLoaiSanPham">
 				<h3>Thêm Loại Sản Phẩm</h3>
@@ -124,6 +137,23 @@
 				</form>
 			</div>
 		</section>
+		<div data-role="panel" data-display="push" data-theme="a"
+			id="nav-panel"
+			class="ui-panel ui-panel-position-left ui-panel-display-push ui-body-b ui-panel-animate ui-panel-open">
+
+			<div class="ui-panel-inner">
+				<ul data-role="listview" class="ui-listview">
+
+					<li><a href="#panel-responsive-page2"
+						class="ui-btn ui-btn-icon-right ui-icon-carat-r">Accordion</a></li>
+					<li><a href="#panel-responsive-page2"
+						class="ui-btn ui-btn-icon-right ui-icon-carat-r" id="btnLogout">Đăng xuất</a></li>
+					<li data-icon="delete" class="ui-first-child"><a href="#"
+						data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-delete">Đóng</a></li>
+				</ul>
+			</div>
+
+		</div>
 	</section>
 
 </body>

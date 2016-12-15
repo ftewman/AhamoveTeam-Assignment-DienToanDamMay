@@ -1,7 +1,7 @@
 /**
  * 
  */
-var link = "api/";
+var api = 'api/';
 	var arrPtP = [];
 	var arrP = [];
 	var idKHtP;
@@ -25,7 +25,7 @@ var link = "api/";
 		var pos = arrP.findIndex(x => x.id === id);
 		backupP = {};
 		if(arrP.length==0){
-			$.getJSON(link+'getproductoredit.php',{action:'getproduct',maSanPham:id},function(resGTE){
+			$.getJSON(api+'getproductoredit.php',{action:'getproduct',maSanPham:id},function(resGTE){
 				var outputP = "";
 					outputP+= '<tr id="'+resGTE.maSanPham+'">'
 						+'<th><b class="ui-table-cell-label">ID</b>'+resGTE.maSanPham+'</th>' 
@@ -52,7 +52,7 @@ var link = "api/";
 			console.log('2. size: '+ arrP.length+'- pos: '+pos+' - '+JSON.stringify(arrP,null));
 			return;
 		}else if(pos ==-1){
-			$.getJSON(link+'getproductoredit.php',{action:'getproduct',maSanPham:id},function(resGTE){
+			$.getJSON(api+'getproductoredit.php',{action:'getproduct',maSanPham:id},function(resGTE){
 				var outputP = "";
 				outputP+= '<tr id="'+resGTE.maSanPham+'">'
 					+'<th><b class="ui-table-cell-label">ID</b>'+resGTE.maSanPham+'</th>' 
@@ -72,7 +72,7 @@ var link = "api/";
 	}
 	
 	function showCustomer(idKH){
-		$.getJSON(link+'getcustomer.php',{action:'getcustomer',maKhachHang:idKH},function(reCC){
+		$.getJSON(api+'getcustomer.php',{action:'getcustomer',maKhachHang:idKH},function(reCC){
 			$('#customerPhone').val(reCC.soDienThoaiKH);
 			$('#customerName').val(reCC.tenKhachHang);
 			$('#customerAddress').val(reCC.diaChiKH);
@@ -101,22 +101,16 @@ $(document).ready(function(){
 			$('#searchProduct').focus();
 			$('#searchProduct').attr('placeholder','Mời thêm sản phẩm');
 		}else{
-			$.getJSON(link+'neworder.php',{tenKH:cusName,sdtKH:cusPhone,diaChiKH:cusAddress,maNV:staffID},function(resNO){
+			$.getJSON(api+'neworder.php',{tenKH:cusName,sdtKH:cusPhone,diaChiKH:cusAddress,maNV:staffID},function(resNO){
 				var orderID = resNO.maHoaDon;
 				$.each(arrP,function(lpi,lpe){
-					$.getJSON(link+'detailorder.php',{maHD:orderID, maSP:lpe.id, soLuong:lpe.soLuong, tongTien:lpe.tongTien},function(resDNO){
-						$('#customerPhone').focus();
-						$('#customerPhone').val('');
-						$('#customerName').val('');
-						$('#customerAddress').val('');
-						$('#searchProduct').val('');
-						arrP.splice(0,arrP.length);
-						arrPtP.splice(0,arrPtP.length);
+					$.getJSON(api+'detailorder.php',{maHD:orderID, maSP:lpe.id, soLuong:lpe.soLuong, tongTien:lpe.tongTien},function(resDNO){
 						if(resDNO.insert=='true'){
 							$('#popupSuccess').popup('open');
 							setTimeout(function(){ 
-								$('#popupSuccess').popup('close');
+								document.location.reload(true);
 							}, 1500);
+						}else{
 							
 						}
 					});
@@ -127,7 +121,7 @@ $(document).ready(function(){
 	
 	});
 	
-	$.getJSON(link+'getcustomer.php',{action:'getcustomers'},function(resCtS){
+	$.getJSON(api+'getcustomer.php',{action:'getcustomers'},function(resCtS){
 		var outputCs = "";
 		$.each(resCtS,function(resCtSi, resCtSe){
 			outputCs+='<li class="ui-screen-hidden">'
@@ -136,7 +130,7 @@ $(document).ready(function(){
 		$('#lvPhone').html(outputCs);
 	});
 	
-	$.getJSON(link+'getproducts.php',function(resPs){
+	$.getJSON(api+'getproducts.php',function(resPs){
 		var outputPs = "";
 		$.each(resPs,function(resPsi, resPse){
 			outputPs+='<li class="ui-screen-hidden">'
@@ -147,13 +141,15 @@ $(document).ready(function(){
 		
 	});
 	
-	$('#btnProduct').click(function(){
-		window.location.assign('productmanagerment.php');
-	});
 	$('#btnOrder').click(function(){
 		window.location.assign('ordermanagerment.php');
 	});
-	 
+	$('#btnInvoice').click(function(){
+		window.location.assign('invoicemanagerment.php');
+	});
+	$('#btnProduct').click(function(){
+		window.location.assign('productmanagerment.php');
+	});
 	$('#btnLogout').click(function(){
 		localStorage.clear();
 		window.location.assign('index.php');

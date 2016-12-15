@@ -1,5 +1,4 @@
-var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay/api/";
-	var backupProduct;
+var api = 'api/';
 	function checklogin(){
 		var resultCheck = localStorage.getItem("result","none");
 		if(resultCheck!='true'){
@@ -10,7 +9,7 @@ var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay/api/";
 	
 	
 	function editProduct(id){
-		$.getJSON(link+'getproductoredit.php',{action:'getproduct',maSanPham:id},function(resGTE){
+		$.getJSON(api+'getproductoredit.php',{action:'getproduct',maSanPham:id},function(resGTE){
 			$('#productNameEdit').val(resGTE.tenSanPham);
 			$('#productNameEdit').attr('name',resGTE.maSanPham);
 			$('#priceEdit').val(resGTE.giaSanPham);
@@ -28,10 +27,9 @@ var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay/api/";
 	}
 //load category and product
 	function loadCatAndProd(){
- 		$.getJSON(link+'getproductandcategories.php',function(res){
+ 		$.getJSON(api+'getproductandcategories.php',function(res){
 	 		var categories = res.Categories;
 		 	var products = res.Products;
-		 	backupProduct = products;
 		 	var outputC = "";
 		 	var outputTbl ="";
 			$.each(categories,function(indexC, elementC){
@@ -58,12 +56,9 @@ var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay/api/";
 			$('#listSanPham').html(outputP);
 	 	});	
  	}
-	
-	
-	
 // delete product
 	function deleteProduct(idDP){
-		$.getJSON(link+'deleteproductorcategory.php',{action:'product',maSanPham:idDP},function(resDP){
+		$.getJSON(api+'deleteproductorcategory.php',{action:'product',maSanPham:idDP},function(resDP){
 			if(resDP.result == "true"){
 				loadCatAndProd();
 			}
@@ -71,7 +66,7 @@ var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay/api/";
 	}
 // delete category
 	function deleteCategory(idDC){
-		$.getJSON(link+'deleteproductorcategory.php',{action:'category',maLoai:idDC},function(resDC){
+		$.getJSON(api+'deleteproductorcategory.php',{action:'category',maLoai:idDC},function(resDC){
 			if(resDC.result == "true"){
 				loadCatAndProd();
 			}
@@ -79,7 +74,7 @@ var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay/api/";
 	}
 	$(document).ready(function() {
 	 	loadCatAndProd();
-	 	$('#productName').focus();
+	 	//$('#productName').focus();
 // add product
 	 	$('#addProduct').click(function (){
 			var productName = $('#productName').val();
@@ -99,7 +94,7 @@ var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay/api/";
 				$('#description').attr('placeholder','Không được để trống');
 				
 			}else{
-				$.getJSON(link+'/insertproductorcategory.php'
+				$.getJSON(api+'insertproductorcategory.php'
 						,{action:'product',tenSanPham:productName,giaSanPham:price,fk_maLoai:productCategories,moTa:description},
 						function(resIP){
 					if(resIP.result == 'true'){
@@ -138,7 +133,7 @@ var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay/api/";
 				$('#descriptionEdit').attr('placeholder','Không được để trống');
 				
 			}else{
-				$.getJSON(link+'getproductoredit.php'
+				$.getJSON(api+'getproductoredit.php'
 						,{action:'editproduct',maSanPham:idUpdate,tenSanPham:productNameEdit,giaSanPham:priceEdit,fk_maLoai:productCategoriesEdit,moTa:descriptionEdit},
 						function(resUP){
 					if(resUP.result == 'true'){
@@ -165,7 +160,7 @@ var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay/api/";
 				$('#catName').attr('placeholder','Không được để trống');
 				return;
 			}
-			$.getJSON(link+'/insertproductorcategory.php'
+			$.getJSON(api+'insertproductorcategory.php'
 					,{action:'category',tenLoai:catName}
 			,function(resIC){
 				if(resIC.result=='true'){
@@ -177,13 +172,16 @@ var link = "http://localhost/inf/AhamoveTeam-Assignment-DienToanDamMay/api/";
 			,function(errIC){alert(errIC)});
 			
 		});
-		$('#btnProduct').click(function(){
-			window.location.assign('productmanagerment.php');
-		});
+		
 		$('#btnOrder').click(function(){
 			window.location.assign('ordermanagerment.php');
 		});
-		 
+		$('#btnInvoice').click(function(){
+			window.location.assign('invoicemanagerment.php');
+		});
+		$('#btnProduct').click(function(){
+			window.location.assign('productmanagerment.php');
+		});
 		$('#btnLogout').click(function(){
 			localStorage.clear();
 			window.location.assign('index.php');
