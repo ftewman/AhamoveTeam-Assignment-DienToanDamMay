@@ -8,11 +8,13 @@
 	
 	$maKH = "";
 	$maHD = "";
+	$ngayMuaHang = "";
 	
 	$maNV = $_REQUEST ["maNV"];
 	$tenKH = $_REQUEST ["tenKH"];
 	$sdtKH = $_REQUEST ["sdtKH"];
 	$diaChiKH = $_REQUEST ["diaChiKH"];
+	$ngayMuaHang = $_REQUEST["ngayMuaHang"];
 	
 	$ketQua = [ ];
 	$getSDTKH = "SELECT `maKhachHang`, `tenKhachHang`, `soDienThoaiKH`, `diaChiKH` FROM `tbl_khachhang` WHERE `soDienThoaiKH`= '$sdtKH'";
@@ -28,7 +30,7 @@
 			$ketQua ["trung"] = "true";
 			
 			// Sau đó lưu hóa đơn:
-			$insertHD = "INSERT INTO `tbl_hoadon` (`fk_maKhachHang`, `fk_maNhanVien`) VALUES ('$maKH', '$maNV')";
+			$insertHD = "INSERT INTO `tbl_hoadon` (`fk_maKhachHang`, `fk_maNhanVien`, `ngayMuaHang`) VALUES ('$maKH', '$maNV', '$ngayMuaHang')";
 			if ($conn->query ( $insertHD ) === TRUE) {
 				// Rồi tìm mã hóa đơn:
 				$getMaHD = "SELECT `maHoaDon` FROM `tbl_hoadon` ORDER BY `maHoaDon` DESC LIMIT 1";
@@ -54,7 +56,7 @@
 				$ketQua ["trung"] = "false";
 				
 				// Sau đó lưu hóa đơn:
-				$insertHD = "INSERT INTO `tbl_hoadon` (`fk_maKhachHang`, `fk_maNhanVien`) VALUES ('$maKH', '$maNV')";
+				$insertHD = "INSERT INTO `tbl_hoadon` (`fk_maKhachHang`, `fk_maNhanVien`, `ngayMuaHang`) VALUES ('$maKH', '$maNV', '$ngayMuaHang')";
 				if ($conn->query ( $insertHD ) === TRUE) {
 					// Rồi tìm mã hóa đơn:
 					$getMaHD = "SELECT `maHoaDon` FROM `tbl_hoadon` ORDER BY `maHoaDon` DESC LIMIT 1";
@@ -72,7 +74,7 @@
 		}
 	}
 	function luuHD($conn, $maKH, $maNV, $maSP, $soLuong, $tongTien, $ketQua) {
-		$insertHD = "INSERT INTO `tbl_hoadon` (`fk_maKhachHang`, `fk_maNhanVien`) VALUES ('$maKH', '$maNV')";
+		$insertHD = "INSERT INTO `tbl_hoadon` (`fk_maKhachHang`, `fk_maNhanVien`, `ngayMuaHang`) VALUES ('$maKH', '$maNV', '$ngayMuaHang')";
 		if ($conn->query ( $insertHD ) === TRUE) {
 			// Rồi tìm mã hóa đơn:
 			$getMaHD = "SELECT `maHoaDon` FROM `tbl_hoadon` ORDER BY `maHoaDon` DESC LIMIT 1";

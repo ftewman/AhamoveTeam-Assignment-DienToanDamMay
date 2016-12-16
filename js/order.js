@@ -101,13 +101,16 @@ $(document).ready(function(){
 			$('#searchProduct').focus();
 			$('#searchProduct').attr('placeholder','Mời thêm sản phẩm');
 		}else{
-			$.getJSON(api+'neworder.php',{tenKH:cusName,sdtKH:cusPhone,diaChiKH:cusAddress,maNV:staffID},function(resNO){
+			var d = new Date();
+			var n = d.getTime();
+			$.getJSON(api+'neworder.php',{tenKH:cusName,sdtKH:cusPhone,diaChiKH:cusAddress,maNV:staffID, ngayMuaHang:n},function(resNO){
 				var orderID = resNO.maHoaDon;
 				$.each(arrP,function(lpi,lpe){
 					$.getJSON(api+'detailorder.php',{maHD:orderID, maSP:lpe.id, soLuong:lpe.soLuong, tongTien:lpe.tongTien},function(resDNO){
 						if(resDNO.insert=='true'){
 							$('#popupSuccess').popup('open');
 							setTimeout(function(){ 
+								$('#popupSuccess').popup('close');
 								document.location.reload(true);
 							}, 1500);
 						}else{

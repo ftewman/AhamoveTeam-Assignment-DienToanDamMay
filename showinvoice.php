@@ -21,8 +21,10 @@ $(document).ready(function(){
 	include 'api/getdetailinvoice.php';
 	?>
 	$('#id').html(json[0].maHoaDon);
-	$('#ngayBan').html(json[0].ngayMuaHang);
-	$('#ngayXuat').html(json[0].ngayMuaHang);
+	var nb = new Date(parseFloat(json[0].ngayMuaHang));
+	var ht = new Date();
+	$('#ngayBan').html(nb.toLocaleDateString()+' ' + nb.toLocaleTimeString());
+	$('#ngayXuat').html(ht.toLocaleDateString()+' ' + ht.toLocaleTimeString());
 	$('#sdt').html(json[0].soDienThoaiKH);
 	$('#ten').html(json[0].tenKhachHang);
 	$('#diaChi').html(json[0].diaChiKH);
